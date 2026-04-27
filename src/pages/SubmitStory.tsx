@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import { CheckCircle, Image as ImageIcon, Upload, Library } from 'lucide-react';
+import { CheckCircle, Upload, Library } from 'lucide-react';
 import { Turnstile } from '@marsidev/react-turnstile';
 
 interface Photo {
