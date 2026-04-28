@@ -18,8 +18,8 @@ export default function UploadPhoto() {
     const lastSub = localStorage.getItem('last_photo_submission');
     if (lastSub) {
       const diff = Date.now() - parseInt(lastSub);
-      if (diff < 5 * 60 * 1000) {
-        setError(`Please wait ${Math.ceil((5 * 60 * 1000 - diff) / 60000)} minutes before uploading another photo.`);
+      if (diff < 15 * 1000) {
+        setError(`Please wait ${Math.ceil((15 * 1000 - diff) / 1000)} seconds before uploading another photo.`);
       }
     }
   }, []);
@@ -43,7 +43,7 @@ export default function UploadPhoto() {
     }
 
     const lastSub = localStorage.getItem('last_photo_submission');
-    if (lastSub && Date.now() - parseInt(lastSub) < 5 * 60 * 1000) {
+    if (lastSub && Date.now() - parseInt(lastSub) < 15 * 1000) {
       setError('Please wait before submitting again.');
       return;
     }
