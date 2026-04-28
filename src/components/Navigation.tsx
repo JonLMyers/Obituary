@@ -1,12 +1,12 @@
 
 import { NavLink } from 'react-router-dom';
-import { Fish } from 'lucide-react';
+import WalleyeIcon from './WalleyeIcon';
 
 export default function Navigation() {
   return (
     <nav className="navbar">
       <div className="nav-brand">
-        <Fish size={24} color="var(--color-accent-sage)" />
+        <WalleyeIcon size={24} color="var(--color-accent-sage)" />
         <span>In Loving Memory</span>
       </div>
       <div className="nav-links">
