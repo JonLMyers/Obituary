@@ -12,7 +12,7 @@ He is preceded in death by his father Lawrence John Myers and mother Sheila (nee
 
 We invite you to continue what he loved to do: share his stories. Please share your memories, pictures, and more.
 
-In lieu of flowers, donations can be made to the National Fish and Wildlife Foundation: https://www.nfwf.org 
+In lieu of flowers, donations can be made to the [National Fish and Wildlife Foundation](https://www.nfwf.org) 
 
 A celebration of life will be held at a later date.
 
