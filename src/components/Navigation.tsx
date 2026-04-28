@@ -7,10 +7,9 @@ export default function Navigation() {
     <nav className="navbar">
       <div className="nav-brand">
         <WalleyeIcon size={24} color="var(--color-accent-sage)" />
-        <span>In Loving Memory</span>
       </div>
       <div className="nav-links">
-        <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end>Obituary</NavLink>
+        <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end>In Loving Memory</NavLink>
         <NavLink to="/stories" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Stories</NavLink>
         <NavLink to="/gallery" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Gallery</NavLink>
       </div>
