@@ -20,9 +20,12 @@ export default function ImageModal({ imageUrl, onClose }: ImageModalProps) {
 
   const modalContent = (
     <div 
-      className="flex items-center justify-center animate-fade-in"
+      className="animate-fade-in"
       onClick={onClose}
       style={{ 
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.85)',
         zIndex: 9999,
         position: 'fixed',
