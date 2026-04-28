@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { Edit3 } from 'lucide-react';
+import ImageModal from '../components/ImageModal';
 
 interface Story {
   id: string;
@@ -14,6 +15,7 @@ interface Story {
 export default function Stories() {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchStories() {
@@ -66,7 +68,8 @@ export default function Stories() {
                     src={getPhotoUrl(story.attached_photo_path)} 
                     alt="Story attachment" 
                     className="w-full h-auto object-cover"
-                    style={{ width: '100%', maxHeight: '300px', objectFit: 'cover' }} 
+                    onClick={() => setSelectedImage(getPhotoUrl(story.attached_photo_path!))}
+                    style={{ width: '100%', maxHeight: '300px', objectFit: 'cover', cursor: 'pointer' }} 
                   />
                 </div>
               )}
@@ -77,6 +80,9 @@ export default function Stories() {
             </div>
           ))}
         </div>
+      )}
+      {selectedImage && (
+        <ImageModal imageUrl={selectedImage} onClose={() => setSelectedImage(null)} />
       )}
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import { Shield, Check, X } from 'lucide-react';
+import ImageModal from '../components/ImageModal';
 
 export default function Admin() {
   const [session, setSession] = useState<any>(null);
@@ -12,6 +13,7 @@ export default function Admin() {
   const [pendingPhotos, setPendingPhotos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [signedUrls, setSignedUrls] = useState<Record<string, string>>({});
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -179,7 +181,8 @@ export default function Admin() {
                     src={getPhotoUrl(story.attached_photo_path)} 
                     alt="Pending story attachment" 
                     className="w-full h-auto object-cover"
-                    style={{ width: '100%', maxHeight: '200px', objectFit: 'cover' }} 
+                    onClick={() => setSelectedImage(getPhotoUrl(story.attached_photo_path))}
+                    style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', cursor: 'pointer' }} 
                   />
                   <p className="text-sm mt-1" style={{ fontSize: '0.8rem', color: '#64748b' }}>Attached photo: {story.attached_photo_path}</p>
                 </div>
@@ -206,7 +209,13 @@ export default function Admin() {
             <div key={photo.id} className="card surface">
               <span className="status-badge status-pending mb-4">Pending</span>
               <div className="gallery-image-wrapper mb-4">
-                <img src={getPhotoUrl(photo.storage_path)} alt="Pending" className="gallery-image" />
+                <img 
+                  src={getPhotoUrl(photo.storage_path)} 
+                  alt="Pending" 
+                  className="gallery-image" 
+                  onClick={() => setSelectedImage(getPhotoUrl(photo.storage_path))}
+                  style={{ cursor: 'pointer' }}
+                />
               </div>
               <p><strong>Submitted By:</strong> {photo.submitted_by}</p>
               {photo.caption && <p><strong>Caption:</strong> {photo.caption}</p>}
@@ -222,6 +231,9 @@ export default function Admin() {
             </div>
           ))}
         </div>
+      )}
+      {selectedImage && (
+        <ImageModal imageUrl={selectedImage} onClose={() => setSelectedImage(null)} />
       )}
     </div>
   );

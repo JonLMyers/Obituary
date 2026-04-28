@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { Camera } from 'lucide-react';
+import ImageModal from '../components/ImageModal';
 
 interface Photo {
   id: string;
@@ -13,6 +14,7 @@ interface Photo {
 export default function Gallery() {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchPhotos() {
@@ -65,6 +67,8 @@ export default function Gallery() {
                   alt={photo.caption || 'Gallery photo'} 
                   className="gallery-image"
                   loading="lazy"
+                  onClick={() => setSelectedImage(getPhotoUrl(photo.storage_path))}
+                  style={{ cursor: 'pointer' }}
                 />
               </div>
               {photo.caption && <p className="gallery-caption">{photo.caption}</p>}
@@ -72,6 +76,9 @@ export default function Gallery() {
             </div>
           ))}
         </div>
+      )}
+      {selectedImage && (
+        <ImageModal imageUrl={selectedImage} onClose={() => setSelectedImage(null)} />
       )}
     </div>
   );

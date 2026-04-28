@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import obituaryData from '../content/obituary.json';
 import bioContent from '../content/bio.md?raw';
 import { supabase } from '../supabaseClient';
+import ImageModal from '../components/ImageModal';
 
 interface Story {
   id: string;
@@ -22,6 +23,7 @@ interface Photo {
 export default function Home() {
   const [recentStories, setRecentStories] = useState<Story[]>([]);
   const [recentPhotos, setRecentPhotos] = useState<Photo[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchRecentData() {
@@ -83,6 +85,7 @@ export default function Home() {
                   <img 
                     {...props} 
                     src={src} 
+                    onClick={() => src && setSelectedImage(src)}
                     style={{ 
                       maxWidth: '100%', 
                       height: 'auto', 
@@ -91,7 +94,8 @@ export default function Home() {
                       marginBottom: '2rem',
                       display: 'block',
                       marginLeft: 'auto',
-                      marginRight: 'auto'
+                      marginRight: 'auto',
+                      cursor: 'pointer'
                     }} 
                   />
                 );
@@ -118,7 +122,8 @@ export default function Home() {
                       src={getPhotoUrl(story.attached_photo_path)} 
                       alt="Story attachment" 
                       className="w-full h-auto object-cover"
-                      style={{ width: '100%', maxHeight: '200px', objectFit: 'cover' }} 
+                      onClick={() => setSelectedImage(getPhotoUrl(story.attached_photo_path!))}
+                      style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', cursor: 'pointer' }} 
                     />
                   </div>
                 )}
@@ -145,6 +150,8 @@ export default function Home() {
                     alt={photo.caption || 'Gallery photo'} 
                     className="gallery-image"
                     loading="lazy"
+                    onClick={() => setSelectedImage(getPhotoUrl(photo.storage_path))}
+                    style={{ cursor: 'pointer' }}
                   />
                 </div>
                 {photo.caption && <p className="gallery-caption">{photo.caption}</p>}
@@ -153,6 +160,9 @@ export default function Home() {
             ))}
           </div>
         </div>
+      )}
+      {selectedImage && (
+        <ImageModal imageUrl={selectedImage} onClose={() => setSelectedImage(null)} />
       )}
     </div>
   );
