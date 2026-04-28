@@ -97,7 +97,8 @@ a:hover {
 /* Navigation */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 3rem;
   align-items: center;
   padding: 1.5rem 3rem;
   background: var(--color-surface);
