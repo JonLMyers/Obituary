@@ -1,5 +1,6 @@
 import { X } from 'lucide-react';
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface ImageModalProps {
   imageUrl: string;
@@ -17,7 +18,7 @@ export default function ImageModal({ imageUrl, onClose }: ImageModalProps) {
 
   if (!imageUrl) return null;
 
-  return (
+  const modalContent = (
     <div 
       className="fixed inset-0 flex items-center justify-center animate-fade-in"
       onClick={onClose}
@@ -63,4 +64,6 @@ export default function ImageModal({ imageUrl, onClose }: ImageModalProps) {
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }
