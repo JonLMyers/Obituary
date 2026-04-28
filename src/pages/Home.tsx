@@ -30,14 +30,14 @@ export default function Home() {
         .select('*')
         .eq('status', 'approved')
         .order('submitted_at', { ascending: false })
-        .limit(2);
+        .limit(10);
 
       const { data: photos } = await supabase
         .from('photos')
         .select('*')
         .eq('status', 'approved')
         .order('submitted_at', { ascending: false })
-        .limit(3);
+        .limit(10);
 
       if (stories) setRecentStories(stories);
       if (photos) setRecentPhotos(photos);
@@ -109,9 +109,9 @@ export default function Home() {
             <h2>Recent Memories</h2>
             <Link to="/stories" className="btn btn-outline">View All Stories</Link>
           </div>
-          <div className="grid grid-cols-2">
+          <div className="horizontal-scroll-container">
             {recentStories.map((story) => (
-              <div key={story.id} className="card surface">
+              <div key={story.id} className="card surface scroll-item">
                 {story.attached_photo_path && (
                   <div className="mb-4 rounded overflow-hidden" style={{ borderRadius: '4px', overflow: 'hidden', marginBottom: '1rem' }}>
                     <img 
@@ -136,9 +136,9 @@ export default function Home() {
             <h2>Gallery Highlights</h2>
             <Link to="/gallery" className="btn btn-outline">View Full Gallery</Link>
           </div>
-          <div className="grid grid-cols-3">
+          <div className="horizontal-scroll-container">
             {recentPhotos.map((photo) => (
-              <div key={photo.id} className="card surface" style={{ padding: '0.75rem' }}>
+              <div key={photo.id} className="card surface scroll-item" style={{ padding: '0.75rem' }}>
                 <div className="gallery-image-wrapper">
                   <img 
                     src={getPhotoUrl(photo.storage_path)} 

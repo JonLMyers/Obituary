@@ -76,7 +76,17 @@ export default function UploadPhoto() {
         }
       });
 
-      if (funcError || data?.error) throw new Error(funcError?.message || data?.error || 'Error saving photo details.');
+      if (funcError) {
+        let errMsg = funcError.message;
+        if (funcError.context) {
+          try {
+            const errResp = await funcError.context.json();
+            if (errResp.error) errMsg = errResp.error;
+          } catch (_) {}
+        }
+        throw new Error(errMsg);
+      }
+      if (data?.error) throw new Error(data.error || 'Error saving photo details.');
 
       localStorage.setItem('last_photo_submission', Date.now().toString());
       setSuccess(true);

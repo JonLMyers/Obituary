@@ -113,7 +113,17 @@ export default function SubmitStory() {
         }
       });
 
-      if (funcError || data?.error) throw new Error(funcError?.message || data?.error || 'There was an error submitting your story.');
+      if (funcError) {
+        let errMsg = funcError.message;
+        if (funcError.context) {
+          try {
+            const errResp = await funcError.context.json();
+            if (errResp.error) errMsg = errResp.error;
+          } catch (_) {}
+        }
+        throw new Error(errMsg);
+      }
+      if (data?.error) throw new Error(data.error || 'There was an error submitting your story.');
       
       localStorage.setItem('last_story_submission', Date.now().toString());
       

@@ -290,6 +290,26 @@ a:hover {
 .grid-cols-2 { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 .grid-cols-3 { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
 
+.horizontal-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5rem;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 320px;
+}
+
 .card {
   padding: 1.5rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
