@@ -14,7 +14,7 @@ We invite you to continue what he loved to do: share his stories. Please share y
 
 In lieu of flowers, donations can be made to the [National Fish and Wildlife Foundation](https://www.nfwf.org) 
 
-A celebration of life will be held at a later date.
+A celebration of life will be held June 20th, 2026 at Sunset Terrace at Lakeview Park 1800 West Erie Avenue Lorain, Ohio 44052 from 6:00 PM to 9:00 PM. 
 
 
 ![Family](/images/family.JPG)
